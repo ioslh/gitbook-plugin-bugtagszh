@@ -1,0 +1,17 @@
+.clearfix() {
+    *zoom: 1;
+    &:before,
+    &:after {
+        content: " "; // 1
+        display: table; // 2
+        // Fixes Opera/contenteditable bug:
+        // http://nicolasgallagher.com/micro-clearfix-hack/#comment-36952
+        line-height: 0;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@main-color: #007feb;
+@white: #fff;
