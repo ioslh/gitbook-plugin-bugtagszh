@@ -24,19 +24,6 @@
     {% endif %}
 {% endblock %}
 
-{% block javascript %}
-    {{ super() }}
-    <script src="/scripts/bugtags.js"></script>
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?61a1e4d2b2f13e650938589a298fcb9d";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-{% endblock %}
 
 {% block book_summary %}
 <nav role="navigation" class="summary">
@@ -56,9 +43,38 @@
 </div>
 {% endblock %}
 
+
 {% block body %}
     <div class="body-wrapper">
         {% include "./global-header.html" %}
         {{ super() }}
     </div>
+{% endblock %}
+
+
+{% block search_input %}
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="{{ '搜索 Bugtags' }}" />
+</div>
+{% endblock %}
+
+{% block search_results %}
+<div id="book-search-results">
+    <div class="search-noresults">
+    {{ super() }}
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            {% block search_has_results %}
+            <h1 class="search-results-title">{{ 'SEARCH_RESULTS_TITLE'|t|safe }}</h1>
+            <ul class="search-results-list"></ul>
+            {% endblock %}
+        </div>
+        <div class="no-results">
+            {% block search_no_results %}
+            <h1 class="search-results-title">{{ 'SEARCH_NO_RESULTS_TITLE'|t|safe }}</h1>
+            {% endblock %}
+        </div>
+    </div>
+</div>
 {% endblock %}
