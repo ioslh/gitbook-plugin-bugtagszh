@@ -1,0 +1,14 @@
+{
+  "name": "gitbook-plugin-bugtagszh",
+  "version": "0.0.1",
+  "engines": {
+    "gitbook": ">=3.0.0"
+  },
+  "description": "Bugtags Official Document Theme based on Gitbook default theme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "oslh",
+  "license": "ISC"
+}

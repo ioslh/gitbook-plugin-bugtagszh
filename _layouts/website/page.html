@@ -1,0 +1,64 @@
+{% extends template.self %}
+
+{% block description %}
+    {{ config.description }}
+{% endblock %}
+
+
+{% block head %}
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="shortcut icon" href="//dn-bts.qbox.me/frontend/img/favicon.ico">
+    <link href="//dn-bts.qbox.me/home/apple-touch-icon-64x64.png" rel="apple-touch-icon">
+    <link href="//dn-bts.qbox.me/home/apple-touch-icon-64x64.png" sizes="64x64" rel="apple-touch-icon">
+    <link href="//dn-bts.qbox.me/home/apple-touch-icon-152x152.png" sizes="152x152" rel="apple-touch-icon">
+    <link rel="mask-icon" sizes="any" color="#007FEB" href="//dn-bts.qbox.me/home/safari-pin-tab-icon.svg">
+    {% if page.next and page.next.path %}
+    <link rel="next" href="{{ page.next.path|resolveFile }}" />
+    {% endif %}
+    {% if page.previous and page.previous.path %}
+    <link rel="prev" href="{{ page.previous.path|resolveFile }}" />
+    {% endif %}
+{% endblock %}
+
+{% block javascript %}
+    {{ super() }}
+    <script src="/scripts/bugtags.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?61a1e4d2b2f13e650938589a298fcb9d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+{% endblock %}
+
+{% block book_summary %}
+<nav role="navigation" class="summary">
+    {% include "./sidenav.html" %}
+</nav>
+<div class="thanks">
+    <div class="logo">
+        <a href="//bughook.com">
+            <i class="icon-logo"></i>
+        </a>
+        <a href="https://gitbook.com" class="gitbook">
+            <img src="https://ek8whxe.cloudimg.io/s/width/34/https://www.gitbook.com/assets/images/logo/128.png?v=15.2.0" alt="">
+            Gitbook
+        </a>
+    </div>
+    Bugtags 帮助中心由 <a href="https://www.gitbook.com/">Gitbook</a> 强力驱动
+</div>
+{% endblock %}
+
+{% block body %}
+    <div class="body-wrapper">
+        {% include "./global-header.html" %}
+        {{ super() }}
+    </div>
+{% endblock %}
