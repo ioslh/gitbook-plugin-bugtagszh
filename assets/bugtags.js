@@ -61,7 +61,7 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
     function renderUser( data ){
         var $header = $('header .global-nav ul')
         $header.find('li.register,li.log').hide()
-        var html = '<a href="' + btHost + '" target="_blank">'
+        var html = '<a href="' + CONFIG.siteHost + '" target="_blank">'
             + '<img src="' + data.avatar + '">' + data.nickname
             + '</a>'
         $header.find('li.user').html( html ).show()
