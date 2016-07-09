@@ -300,9 +300,21 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
         $bookBody.css( 'height', gH - 50 )
     }
 
+    function possibleURLSearch(){
+        var q = getParaFromUrl( 'q' )
+        if( q ){
+
+        }else{
+            // do nothing
+        }
+    }
+
+
     gitbook.events.on('start',function(e, config){
         CONFIG = config.bugtagszh || {}
         initUser();
+        // 如果链接中带有搜索关键词，则需要进行搜索
+        possibleURLSearch()
     })
 
     gitbook.events.on('page.change',function(){
