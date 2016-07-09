@@ -78,7 +78,6 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
             console.log("没有配置搜索 API")
             return;
         }
-
         $searchInput.on("keyup",function( e ){
             var q = $(this).val()
             if( q ){
@@ -122,171 +121,6 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
         //     console.log( res )
         // })
         var fakeRes = {
-            list:[
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                },
-                {
-                    atime:'2016-07-07 10:07:07',
-                    ctime:'2016-07-07 10:07:07',
-                    mtime:'2016-07-07 10:07:07',
-                    content:'DK↵↵通过 CocoaPods 集成手动集成下载 SDK评论',
-                    title:'iOS 集成 SDK',
-                    url:'/start/integrate/ios/index.html',
-                    highlight:{
-                        content:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>通过 CocoaPods'
-                        ],
-                        title:[
-                            'iOS 集成 <em class="btg_highlight">SDK</em>'
-                        ]
-                    }
-                }
-            ],
-            page:1,
-            page_num:2,
-            per_page:10
         }
 
         setTimeout(function(){
@@ -300,10 +134,24 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
         $bookBody.css( 'height', gH - 50 )
     }
 
+    function getParaFromUrl( name ){
+        var url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)', 'i'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
     function possibleURLSearch(){
         var q = getParaFromUrl( 'q' )
         if( q ){
-
+            if( !$searchInput ){
+                $searchInput = $('#book-search-input input');
+            }
+            $searchInput.val( q )
+            launchSearch( q )
         }else{
             // do nothing
         }
