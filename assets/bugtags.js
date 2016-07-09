@@ -16,6 +16,19 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
     var xhr;
     var CONFIG = {};
 
+
+    var proxyLaunchSearch = function(){
+        var timer
+        return function( q ){
+            if( timer ){
+                clearTimeout( timer )
+            }
+            timer = setTimeout(function(){
+                launchSearch( q )
+            },500)
+        }
+    }()
+
     function getCookie( name ){
         var nameEQ = name + '=';
         var cookies = document.cookie.split(';');
@@ -86,7 +99,7 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
                         // xhr.abort()
                     }
                     keyword = q
-                    launchSearch( q )
+                    proxyLaunchSearch( q )
                 }
             }else{
                 closeSearch()
@@ -94,38 +107,103 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
         })
     }
 
-    function closeSearch() {
+    function closeSearch( keepKeyword ) {
         keyword = null
         $body.removeClass('with-search');
         $body.removeClass('search-loading')
         $bookSearchResults.removeClass('open');
         // Empty search input
-        $searchInput.val('');
+        if( !keepKeyword ){
+            $searchInput.val('');
+        }
     }
 
-    function displayResults( res ){
+    function displayResults( data ){
         $bookSearchResults.addClass('open');
-        var noResults = res.list.length == 0;
+        var noResults = data.list.length == 0;
         $bookSearchResults.toggleClass('no-results', noResults);
         $searchList.empty();
-        $searchResultsCount.text(res.count);
-        $searchQuery.text( keyword );
-        console.log("Should display results here")
+        $searchResultsCount.text( data.list.length );
+        $searchQuery.text( data.query );
+        if( !noResults ){
+            data.list.forEach(function( item ){
+                var $li = $('<li>', {
+                    'class': 'search-results-item'
+                });
+                var $title = $('<h3>');
+
+                var $link = $('<a>', {
+                    'href': item.url,
+                    'click': function(e) {
+                        closeSearch();
+                    }
+                });
+                if( data.highlight && data.highlight.title ){
+                    $link.html( data.highlight.title )
+                }else{
+                    $link.html( data.title )
+                }
+
+                var content
+                if( data.highlight && data.highlight.content && data.highlight.content.length ){
+                    content = '...' + data.highlight.content.join('...') + '...'
+                }else{
+                    content = data.content.trim()
+                }
+
+                if (content.length > MAX_DESCRIPTION_SIZE) {
+                    content = content.slice(0, MAX_DESCRIPTION_SIZE).trim()+'...';
+                }
+                var $content = $('<p>').html(content);
+
+                $link.appendTo($title);
+                $title.appendTo($li);
+                $content.appendTo($li);
+                $li.appendTo($searchList)
+            })
+        }
     }
 
     function launchSearch( q ){
         $body.addClass('with-search');
         $body.addClass('search-loading');
         var url = CONFIG.searchPrefix + encodeURIComponent( q )
-        // xhr = $.get( url, function( res ){
-        //     console.log( res )
-        // })
-        var fakeRes = {
-        }
 
-        setTimeout(function(){
-            displayResults( fakeRes )
-        },2000)
+        if( xhr ){
+            xhr.abort()
+        }
+        $.ajax({
+            url: url ,
+            timeout:1500,
+            success:function( res ){
+                res.data.query = q
+                displayResults( res.data )
+            },
+            complete:function( x, reason ){
+                if( reason == 'timeout' ){
+                    closeSearch( true )
+                    showAjaxErrorTip()
+                }
+            }
+        })
+    }
+
+    function showAjaxErrorTip(){
+        var $con = $('.book-header h1').css('opacity',1)
+        if( $con.timer ){
+            clearTimeout( $con.timer )
+        }
+        var $link = $con.find('a').hide()
+        var $span = $con.find('span')
+        if( !$span.length ){
+            $span = $('<span></span>').css('color','red').appendTo( $con )
+        }
+        $span.html('网络错误')
+        $con.timer = setTimeout(function(){
+            $con.attr('style','')
+            $span.remove()
+            $link.show()
+        },800)
     }
 
     function resetContainerHeight(){
@@ -161,13 +239,13 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
     gitbook.events.on('start',function(e, config){
         CONFIG = config.bugtagszh || {}
         initUser();
-        // 如果链接中带有搜索关键词，则需要进行搜索
-        possibleURLSearch()
     })
 
     gitbook.events.on('page.change',function(){
         bindSearch()
         closeSearch()
         resetContainerHeight()
+        // 如果链接中带有搜索关键词，则需要进行搜索
+        possibleURLSearch()
     })
 })
