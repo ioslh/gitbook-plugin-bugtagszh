@@ -1,3 +1,39 @@
-#book-search-results .search-results {
-  display: none;
+body{
+
+}
+#book-search-results{
+    .search-results{
+        display: none;
+    }
+    .search-noresults{
+        display: block;
+    }
+    &.open{
+        .search-noresults{
+            display: none;
+        }
+        .search-results{
+            display: block;
+            .has-results{
+                display: block;
+            }
+            .no-results{
+                display: none;
+            }
+        }
+        &.no-results{
+            .search-noresults{
+                display: none;
+            }
+            .search-results{
+                display: block;
+                .has-results{
+                    display: none;
+                }
+                .no-results{
+                    display: block;
+                }
+            }
+        }
+    }
 }

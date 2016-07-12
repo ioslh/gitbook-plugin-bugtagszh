@@ -115,6 +115,33 @@
 #book-search-results .search-results {
   display: none;
 }
+#book-search-results .search-noresults {
+  display: block;
+}
+#book-search-results.open .search-noresults {
+  display: none;
+}
+#book-search-results.open .search-results {
+  display: block;
+}
+#book-search-results.open .search-results .has-results {
+  display: block;
+}
+#book-search-results.open .search-results .no-results {
+  display: none;
+}
+#book-search-results.open.no-results .search-noresults {
+  display: none;
+}
+#book-search-results.open.no-results .search-results {
+  display: block;
+}
+#book-search-results.open.no-results .search-results .has-results {
+  display: none;
+}
+#book-search-results.open.no-results .search-results .no-results {
+  display: block;
+}
 .body-wrapper {
   width: 100%;
   height: 100%;
@@ -209,6 +236,7 @@ header .header-inner .global-nav ul li a:hover {
 }
 .book-summary .thanks .logo {
   text-align: center;
+  margin-bottom: 12px;
 }
 .book-summary .thanks .logo a {
   text-decoration: none;

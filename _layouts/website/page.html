@@ -1,7 +1,14 @@
 {% extends template.self %}
 
+
 {% block description %}
-    {{ config.description }}
+    {% if page.description %}
+        {{ page.description }}
+    {% elif page.content %}
+        {{ page.content|striptags }}
+    {% else %}
+        {{ config.description }}
+    {% endif %}
 {% endblock %}
 
 
@@ -10,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords|join(',') }}{% else %}{{ 'bug使用教程,bug集成方式,Android崩溃,iOS崩溃,bug管理' }}{% endif %}">
 
     <link rel="shortcut icon" href="//dn-bts.qbox.me/frontend/img/favicon.ico">
     <link href="//dn-bts.qbox.me/home/apple-touch-icon-64x64.png" rel="apple-touch-icon">
@@ -31,10 +39,10 @@
 </nav>
 <div class="thanks">
     <div class="logo">
-        <a href="//bughook.com">
+        <a href="//bughook.com" target="_blank">
             <i class="icon-logo"></i>
         </a>
-        <a href="https://gitbook.com" class="gitbook">
+        <a href="https://gitbook.com" target="_blank" class="gitbook">
             <img src="https://ek8whxe.cloudimg.io/s/width/34/https://www.gitbook.com/assets/images/logo/128.png?v=15.2.0" alt="">
             Gitbook
         </a>
@@ -54,7 +62,7 @@
 
 {% block search_input %}
 <div id="book-search-input" role="search">
-    <input type="text" placeholder="{{ '搜索 Bugtags' }}" />
+    <input type="text" placeholder="搜索 Bugtags" />
 </div>
 {% endblock %}
 
@@ -66,13 +74,13 @@
     <div class="search-results">
         <div class="has-results">
             {% block search_has_results %}
-            <h1 class="search-results-title">{{ 'SEARCH_RESULTS_TITLE'|t|safe }}</h1>
+            <h1 class="search-results-title">“<span class="search-query"></span>”相关的搜索结果</h1>
             <ul class="search-results-list"></ul>
             {% endblock %}
         </div>
         <div class="no-results">
             {% block search_no_results %}
-            <h1 class="search-results-title">{{ 'SEARCH_NO_RESULTS_TITLE'|t|safe }}</h1>
+            <h1 class="search-results-title">没有找到“<span class="search-query"></span>”相关的搜索结果</h1>
             {% endblock %}
         </div>
     </div>

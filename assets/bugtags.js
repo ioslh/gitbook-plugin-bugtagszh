@@ -92,16 +92,19 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
             return;
         }
         $searchInput.on("keyup",function( e ){
-            var q = $(this).val()
+            var q = $(this).val().trim()
             if( q ){
                 if( q != keyword ){
                     if( xhr ){
-                        // xhr.abort()
+                        xhr.abort()
                     }
                     keyword = q
                     proxyLaunchSearch( q )
                 }
             }else{
+                if( xhr ){
+                    xhr.abort()
+                }
                 closeSearch()
             }
         })
@@ -120,6 +123,8 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
 
     function displayResults( data ){
         $bookSearchResults.addClass('open');
+        $body.removeClass('search-loading');
+
         var noResults = data.list.length == 0;
         $bookSearchResults.toggleClass('no-results', noResults);
         $searchList.empty();
@@ -138,17 +143,17 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
                         closeSearch();
                     }
                 });
-                if( data.highlight && data.highlight.title ){
-                    $link.html( data.highlight.title )
+                if( item.highlight && item.highlight.title ){
+                    $link.html( item.highlight.title )
                 }else{
-                    $link.html( data.title )
+                    $link.html( item.title )
                 }
 
                 var content
-                if( data.highlight && data.highlight.content && data.highlight.content.length ){
-                    content = '...' + data.highlight.content.join('...') + '...'
+                if( item.highlight && item.highlight.content && item.highlight.content.length ){
+                    content = '...' + item.highlight.content.join('...') + '...'
                 }else{
-                    content = data.content.trim()
+                    content = item.content.trim()
                 }
 
                 if (content.length > MAX_DESCRIPTION_SIZE) {
@@ -172,6 +177,29 @@ require([ 'gitbook', 'jquery'],function( gitbook, $ ){
         if( xhr ){
             xhr.abort()
         }
+        // var fakeData = {
+        //     // list:[{
+        //     //     atime:"2016-07-09 16:33:21",
+        //     //     ctime:"2016-07-09 16:33:21",
+        //     //     mtime:"2016-07-09 16:33:21",
+        //     //     content:"Android SDK API↵初始化 Bugtags↵设置自定义选项初始化↵BugtagsOptions optio",
+        //     //     title:"Android SDK API",
+        //     //     url:"/api/android/index.html",
+        //     //     highlight:{
+        //     //         content:['Android <em class="btg_highlight">SDK</em> API↵初始化 Bugtags↵设'],
+        //     //         title:['Android <em class="btg_highlight">SDK</em> API']
+        //     //     }
+        //     // }],
+        //     list:[],
+        //     page:1,
+        //     page_num:1,
+        //     per_page:10,
+        //     query:q
+        // }
+        //
+        // setTimeout(function(){
+        //     displayResults( fakeData )
+        // },1000)
         $.ajax({
             url: url ,
             timeout:1500,
